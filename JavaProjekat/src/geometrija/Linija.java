@@ -33,7 +33,7 @@ public class Linija extends Oblik implements Pomerljiv{
 	public boolean equals(Object obj){
 		if(obj instanceof Linija){
 			Linija pomocna=(Linija) obj;
-			if(this.tPocetna.equals(pomocna.tPocetna) && this.equals(pomocna.tKrajnja))
+			if(this.tPocetna.equals(pomocna.tPocetna) && this.tKrajnja.equals(pomocna.tKrajnja))
 				return true;
 			else
 				return false;

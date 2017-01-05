@@ -54,13 +54,15 @@ public class Crtanje extends JFrame {
 	private JPanel pnlGlavni;
 	
 	private String odabran;
-	private JButton btnOdabranOblik;
+	private JButton btnOdabranDugmic;
 	private Oblik odabranOblik = null;
 	private int iteracija = 0;
 	
 	private JLabel lblKoordinate;
 	private JLabel lblPlatno;
 	private JPanel pnlCtrez;
+	
+	private JButton btnModifikuj, btnSelektuj, btnObrisi;
 	
 	private Oblik selektovan =  null;
 	
@@ -114,7 +116,7 @@ public class Crtanje extends JFrame {
 	
 		btnTacka.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				odabirOblika((JButton)e.getSource());
+				odabiriDugme((JButton)e.getSource());
 			}
 		});
 		pnlOblici.add(btnTacka, "cell 0 1,grow");
@@ -122,7 +124,7 @@ public class Crtanje extends JFrame {
 		JButton btnPravougaonik = new JButton("Pravougaonik");
 		btnPravougaonik.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				odabirOblika((JButton)arg0.getSource());
+				odabiriDugme((JButton)arg0.getSource());
 			}
 		});
 		pnlOblici.add(btnPravougaonik, "cell 1 1");
@@ -131,7 +133,7 @@ public class Crtanje extends JFrame {
 	
 		btnLinija.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				odabirOblika((JButton)e.getSource());
+				odabiriDugme((JButton)e.getSource());
 			}
 		});
 		pnlOblici.add(btnLinija, "cell 0 2,grow");
@@ -139,7 +141,7 @@ public class Crtanje extends JFrame {
 		JButton btnKvadrat = new JButton("Kvadrat");
 		btnKvadrat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				odabirOblika((JButton)e.getSource());
+				odabiriDugme((JButton)e.getSource());
 			}
 		});
 		pnlOblici.add(btnKvadrat, "cell 1 2,grow");
@@ -147,7 +149,7 @@ public class Crtanje extends JFrame {
 		JButton btnKrug = new JButton("Krug");
 		btnKrug.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				odabirOblika((JButton)e.getSource());
+				odabiriDugme((JButton)e.getSource());
 			}
 		});
 		pnlOblici.add(btnKrug, "cell 0 3 2 1,growx");
@@ -184,23 +186,28 @@ public class Crtanje extends JFrame {
 		JLabel lblUnutra = new JLabel("Unutra\u0161njost");
 		panel.add(lblUnutra, "cell 1 2,growx,aligny center");
 		
-		JPanel panel_1 = new JPanel();
-		pnlPalete.add(panel_1);
-		panel_1.setLayout(new MigLayout("", "[][][]", "[][]"));
+		JPanel pnlKomande = new JPanel();
+		pnlPalete.add(pnlKomande);
+		pnlKomande.setLayout(new MigLayout("", "[][][]", "[][]"));
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		panel_1.add(lblNewLabel, "cell 0 0 3 1,alignx center,aligny center");
+		JLabel lblKomande = new JLabel("Komande");
+		pnlKomande.add(lblKomande, "cell 0 0 3 1,alignx center,aligny center");
 		
-		JButton btnSelektuj = new JButton("Selektuj");
+		btnSelektuj = new JButton("Selektuj");
 		btnSelektuj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
+				odabiriDugme((JButton)e.getSource());
 			}
 		});
-		panel_1.add(btnSelektuj, "cell 0 1");
+		pnlKomande.add(btnSelektuj, "cell 0 1");
 		
-		JButton btnPomeriZa = new JButton("Pomeri za");
-		btnPomeriZa.addActionListener(new ActionListener() {
+		btnModifikuj = new JButton("Modifikuj");
+		btnModifikuj.setEnabled(false);
+		btnModifikuj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				/* Pomeri za
 				String inp = JOptionPane.showInputDialog("x:y");
 				
 				Pomerljiv sel = (Pomerljiv)selektovan;
@@ -224,15 +231,33 @@ public class Crtanje extends JFrame {
 						
 						inp = JOptionPane.showInputDialog("pogresan unos! unesi u obliku x:y");
 					}
-				}
+				}*/
+				
+				
+				
 							
 			}
 		});
-		panel_1.add(btnPomeriZa, "cell 1 1");
+		pnlKomande.add(btnModifikuj, "cell 1 1");
 		
-		JButton btnPomeriNa = new JButton("Pomeri na");
-		btnPomeriNa.addActionListener(new ActionListener() {
+		btnObrisi = new JButton("Obrisi");
+		btnObrisi.setEnabled(false);
+		btnObrisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				//System.out.println(selektovan.equals(stakOblika.get(0)));
+				
+				System.out.println("brisem: " + selektovan);
+				stakOblika.removeElement(selektovan);
+				selektovan = null;
+				osveziCrtez();
+				
+				
+				btnModifikuj.setEnabled(false);
+				btnObrisi.setEnabled(false);
+				
+				System.out.println(stakOblika);
+				/* pomeri na 
 				String inp = JOptionPane.showInputDialog("x:y");
 				
 				Pomerljiv sel = (Pomerljiv)selektovan;
@@ -255,12 +280,16 @@ public class Crtanje extends JFrame {
 						inp = JOptionPane.showInputDialog("pogresan unos! unesi u obliku x:y");
 					}
 				}
-				
+				*/
 				
 				
 			}
 		});
-		panel_1.add(btnPomeriNa, "cell 2 1");
+		pnlKomande.add(btnObrisi, "cell 2 1");
+		
+		JPanel panel_1 = new JPanel();
+		pnlPalete.add(panel_1);
+		panel_1.setLayout(new MigLayout("", "[][][][]", "[][][]"));
 		
 		pnlCtrez = new JPanel();
 		pnlCtrez.addComponentListener(new ComponentAdapter() {
@@ -293,11 +322,13 @@ public class Crtanje extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				
-				if(btnOdabranOblik == btnTacka){
+				
+				
+				if(btnOdabranDugmic == btnTacka){
 					odabranOblik = new Tacka(e.getX(),e.getY(),btnBojaKonture.getBackground());					
 					odabranOblik.crtajSe(pnlCtrez.getGraphics());
 					
-				}else if (btnOdabranOblik == btnLinija){
+				}else if (btnOdabranDugmic == btnLinija){
 			
 					if(iteracija == 0){
 						odabranOblik = new Linija(new Tacka(e.getX(),e.getY()),new Tacka(0,0),btnBojaKonture.getBackground());
@@ -309,7 +340,7 @@ public class Crtanje extends JFrame {
 						l.crtajSe(pnlCtrez.getGraphics());
 						iteracija = 0;
 					}
-				}else if (btnOdabranOblik == btnKvadrat) {
+				}else if (btnOdabranDugmic == btnKvadrat) {
 					//JOptionPane.showMessageDialog(null, "Kliknuto je na dugme!", "Poruka", JOptionPane.ERROR_MESSAGE);
 					String inp = JOptionPane.showInputDialog("Unesi stranicu");
 					boolean p = true;
@@ -329,7 +360,7 @@ public class Crtanje extends JFrame {
 					}
 					
 					
-				}else if (btnOdabranOblik == btnPravougaonik) {
+				}else if (btnOdabranDugmic == btnPravougaonik) {
 					//JOptionPane.showMessageDialog(null, "Kliknuto je na dugme!", "Poruka", JOptionPane.ERROR_MESSAGE);
 					String inpSirina = JOptionPane.showInputDialog("Unesi sirinu");
 					int sirina = 0;
@@ -364,7 +395,7 @@ public class Crtanje extends JFrame {
 					}
 					
 					
-				}else if (btnOdabranOblik == btnKrug) {
+				}else if (btnOdabranDugmic == btnKrug) {
 					//JOptionPane.showMessageDialog(null, "Kliknuto je na dugme!", "Poruka", JOptionPane.ERROR_MESSAGE);
 					String inp = JOptionPane.showInputDialog("Unesi poluprecnik");
 					boolean p = true;
@@ -384,7 +415,7 @@ public class Crtanje extends JFrame {
 					}
 					
 					
-				}else{
+				}else if (btnOdabranDugmic == btnSelektuj){
 					
 					//pnlCtrez.revalidate();
 					//pnlCtrez.repaint();
@@ -396,15 +427,10 @@ public class Crtanje extends JFrame {
 					t.crtajSe(pnlCtrez.getGraphics());*/
 					
 					if(selektovan != null){
-						Pravougaonik p = new Pravougaonik(new Tacka(0,0), pnlCtrez.getWidth(), pnlCtrez.getHeight(), Color.WHITE,Color.WHITE);
-						p.crtajSe(pnlCtrez.getGraphics());
-						
-						
-						for(Oblik o : stakOblika){
-							System.out.println(o);
-							o.crtajSe(pnlCtrez.getGraphics());
-						}
 						selektovan = null;
+						osveziCrtez();
+						btnModifikuj.setEnabled(false);
+						btnObrisi.setEnabled(false);
 					}
 					
 				
@@ -417,12 +443,17 @@ public class Crtanje extends JFrame {
 							
 							selektovan = stakOblika.get(i);		
 							selektovan.selektovan(pnlCtrez.getGraphics());
+							btnModifikuj.setEnabled(true);
+							btnObrisi.setEnabled(true);
 							
-						
+							
 							
 							return;
 						}
 					}
+				}else{
+					selektovan = null;
+					osveziCrtez();
 				}
 				
 				if(odabranOblik != null)
@@ -476,20 +507,29 @@ public class Crtanje extends JFrame {
 			selektovan.selektovan(pnlCtrez.getGraphics());
 	}
 	
-	private void odabirOblika(JButton dugme){
+	private void odabiriDugme(JButton dugme){
+		
+		selektovan = null;
+		osveziCrtez();
+		btnModifikuj.setEnabled(false);
+		btnObrisi.setEnabled(false);
+		
+		
+		
 		iteracija = 0;
 		odabranOblik = null;
-		if(btnOdabranOblik == dugme){
-			btnOdabranOblik.setForeground(Color.BLACK);
-			btnOdabranOblik = null;	
+		if(btnOdabranDugmic == dugme){
+			btnOdabranDugmic.setForeground(Color.BLACK);
+			btnOdabranDugmic = null;	
 			
 		}else{
-			if(btnOdabranOblik != null){
-				btnOdabranOblik.setForeground(Color.BLACK);
+			if(btnOdabranDugmic != null){
+				btnOdabranDugmic.setForeground(Color.BLACK);
 			}
 			
-			btnOdabranOblik = dugme;
-			btnOdabranOblik.setForeground(Color.RED);
+			btnOdabranDugmic = dugme;
+			btnOdabranDugmic.setForeground(Color.RED);
+			
 		}
 	}
 	
