@@ -5,6 +5,7 @@ import java.awt.Graphics;
 
 public abstract class Oblik implements Comparable{
 	private Color boja = Color.BLACK;
+	private String bojaStr = "crna";
 	private boolean selektovan;
 	
 	public Oblik(){
@@ -49,6 +50,14 @@ public abstract class Oblik implements Comparable{
 	}
 	public void setSelektovan(boolean selektovan) {
 		this.selektovan = selektovan;
+	}
+	
+	public String getBojaStr() {
+		return bojaStr;
+	}
+
+	public void setBojaStr(String bojaStr) {
+		this.bojaStr = bojaStr;
 	}
 	
 }

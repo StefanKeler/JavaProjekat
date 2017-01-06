@@ -108,6 +108,7 @@ public class Crtanje extends JFrame {
 
 
 	public Crtanje() {
+		setTitle("Crtanje, Keler Stefan IT 27-2015");
 
 
 

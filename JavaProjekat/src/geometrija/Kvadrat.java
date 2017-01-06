@@ -29,6 +29,14 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 		//this(goreLevo, duzinaStranice);
 		//this.boja = boja;
 	}
+	
+	public Kvadrat(Tacka goreLevo, int duzinaStranice, String bojaKonture, String bojaUnutrasnjosti){
+		this(goreLevo,duzinaStranice);
+		setBojaStr(bojaKonture);
+		setBojaUnutrasnjostiStr(bojaUnutrasnjosti);
+		//this(goreLevo, duzinaStranice);
+		//this.boja = boja;
+	}
 
 
 	public Linija dijagonala(){
@@ -41,6 +49,10 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 
 	public String toString(){
 		return "gornji levi ugao=("+goreLevo.getX()+","+goreLevo.getY()+"), stranica="+duzinaStranice;
+	}
+	
+	public String opis(){
+		return "gornji levi ugao=("+goreLevo.getX()+","+goreLevo.getY()+"), stranica="+duzinaStranice + ", boja konture: \"" + getBojaStr() + "\", boja unutrasnjosti: \" " + getBojaUnutrasnjostiStr() + "\"";
 	}
 
 	public boolean equals(Object obj){
