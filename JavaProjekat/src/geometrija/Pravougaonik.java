@@ -18,7 +18,7 @@ public class Pravougaonik extends Kvadrat{
 		this(goreLevo, sirina, visina);
 		setBoja(boja);
 	}
-	
+
 	public Pravougaonik(Tacka goreLevo, int sirina, int visina, Color bojaKonture, Color bojaUnutrasnjosti){
 		this(goreLevo, sirina, visina, bojaKonture);
 		setBojaUnutrasnjosti(bojaUnutrasnjosti);
@@ -28,11 +28,11 @@ public class Pravougaonik extends Kvadrat{
 		return new Linija(goreLevo, new Tacka(goreLevo.getX() + sirina,goreLevo.getY() + duzinaStranice));
 	}
 
-	public void pomeriNa(int x, int y){
+	public void pomeriNa(int x, int y) throws Exception{
 		goreLevo.setX(x);
 		goreLevo.setY(y);
 	}
-	public void pomeriZa(int x, int y){
+	public void pomeriZa(int x, int y) throws Exception{
 		goreLevo.setX(goreLevo.getX()+x);
 		goreLevo.setY(goreLevo.getY()+y);
 
@@ -102,11 +102,18 @@ public class Pravougaonik extends Kvadrat{
 		return sirina;
 	}
 
-	public void setVisina(int visina) {
-		this.duzinaStranice = visina;
+	public void setVisina(int visina) throws Exception{
+		if(visina <= 0)
+			throw new Exception("Duzina visine mora biti pozitivan broj!");
+		else
+			this.duzinaStranice = visina;
 	}
-	public void setSirina(int sirina) {
-		this.sirina = sirina;
+	public void setSirina(int sirina) throws Exception{
+		if(sirina <= 0)
+			throw new Exception("Duzina sirine mora biti pozitivan broj!");
+		else
+			this.sirina = sirina;
+		
 	}
 
 

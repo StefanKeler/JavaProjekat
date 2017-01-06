@@ -29,11 +29,11 @@ public class Krug extends PovrsinskiOblik implements Pomerljiv{
 		return "centar " + centar + ", poluprecnik=" + r;
 	}
 
-	public void pomeriNa(int x, int y){
+	public void pomeriNa(int x, int y) throws Exception{
 		centar.setX(x);
 		centar.setY(y);
 	}
-	public void pomeriZa(int x, int y){
+	public void pomeriZa(int x, int y) throws Exception{
 		centar.setX(centar.getX()+x);
 		centar.setY(centar.getY()+y);
 	}
@@ -85,8 +85,11 @@ public class Krug extends PovrsinskiOblik implements Pomerljiv{
 	public void setCentar(Tacka centar) {
 		this.centar = centar;
 	}
-	public void setR(int r) {
-		this.r = r;
+	public void setR(int r) throws Exception{
+		if(r <= 0)
+			throw new Exception("Duzina poluprecnika mora biti pozitivan broj!");
+		else
+			this.r = r;		
 	}
 
 

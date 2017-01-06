@@ -59,7 +59,7 @@ public class Tacka extends Oblik implements Pomerljiv{
 			return true;
 		else
 			return false;
-		
+
 	}
 	public void selektovan(Graphics g){
 		g.setColor(pronadjiBoju("plava"));
@@ -82,9 +82,9 @@ public class Tacka extends Oblik implements Pomerljiv{
 			Tacka drugaPomocna = new Tacka(x, y);
 			int pom1 = (int) nula.udaljenost(drugaPomocna);
 			int pom2 = (int) nula.udaljenost(pomocna);
-			
+
 			return pom1 - pom2;
-			
+
 		}
 		else
 			return 0;
@@ -97,11 +97,17 @@ public class Tacka extends Oblik implements Pomerljiv{
 		return y;
 	}
 
-	public void setX(int novoX){
-		x = novoX;
+	public void setX(int novoX)throws Exception{
+		if(novoX<0)
+			throw new Exception("X mora biti minimum 0!");
+		else
+			x = novoX;
 	}
-	public void setY(int novoY){
-		y = novoY;
+	public void setY(int novoY)throws Exception{
+		if(novoY<0)
+			throw new Exception("Y mora biti minimum 0!");
+		else
+			y = novoY;
 	}
 
 }

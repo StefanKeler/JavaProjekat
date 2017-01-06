@@ -30,7 +30,7 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 		//this.boja = boja;
 	}
 
-	
+
 	public Linija dijagonala(){
 		return new Linija(goreLevo, new Tacka(goreLevo.getX() + duzinaStranice,goreLevo.getY() + duzinaStranice));
 	}
@@ -55,12 +55,12 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 			return false;
 	}
 
-	public void pomeriNa(int x, int y){
+	public void pomeriNa(int x, int y) throws Exception{
 		goreLevo.setX(x);
 		goreLevo.setY(y);
 	}
 
-	public void pomeriZa(int x, int y){
+	public void pomeriZa(int x, int y) throws Exception{
 		goreLevo.setX(goreLevo.getX()+x);
 		goreLevo.setY(goreLevo.getY()+y);
 	}
@@ -119,17 +119,17 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 	public void setGoreLevo(Tacka goreLevo) {
 		this.goreLevo = goreLevo;
 	}
-	public void setDuzinaStranica(int duzinaStranica) {
-		this.duzinaStranice = duzinaStranica;
+	public void setDuzinaStranice(int duzinaStranica) throws Exception{
+		if(duzinaStranica<=0)
+			throw new Exception("Duzina stranice mora biti pozitavan broj!");
+		else
+			this.duzinaStranice = duzinaStranica;
 	}
 	public int getDuzinaStranice() {
 		return duzinaStranice;
 	}
 
-	public void setDuzinaStranice(int duzinaStranice) {
-		this.duzinaStranice = duzinaStranice;
-	}
-
+	
 
 
 }

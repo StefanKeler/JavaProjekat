@@ -47,7 +47,7 @@ public class Linija extends Oblik implements Pomerljiv{
 		return tPocetna.udaljenost(tKrajnja);
 	}
 
-	public void pomeriZa(int x, int y){
+	public void pomeriZa(int x, int y)throws Exception{
 		tPocetna.setX(tPocetna.getX()+x);
 		tPocetna.setY(tPocetna.getY()+y);
 		tKrajnja.setX(tKrajnja.getX()+x);
@@ -55,7 +55,7 @@ public class Linija extends Oblik implements Pomerljiv{
 
 	}
 	
-	public void pomeriNa(int x, int y) {
+	public void pomeriNa(int x, int y) throws Exception{
 		int rx = tPocetna.getX() - tKrajnja.getX();
 		int ry = tPocetna.getY() - tKrajnja.getY();
 		tPocetna.setX(x);
