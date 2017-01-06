@@ -228,15 +228,23 @@ public class Crtanje extends JFrame {
 
 				//System.out.println(selektovan.equals(stakOblika.get(0)));
 
-				System.out.println("brisem: " + selektovan);
-				stakOblika.removeElement(selektovan);
-				selektovan = null;
-				osveziCrtez();
+
+				Object[] opcije = {"DA","NE"};
+				int n = JOptionPane.showOptionDialog(null,"Da li sigurni da zelite da obisete? ","Upozorenje",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,opcije,opcije[1]);
+
+				if(n == 0){
+					System.out.println("brisem: " + selektovan);
+					stakOblika.removeElement(selektovan);
+					selektovan = null;
+					osveziCrtez();
 
 
-				osveziUIKomande(false);
+					osveziUIKomande(false);
 
-				System.out.println(stakOblika);
+					System.out.println(stakOblika);
+				}
+
+
 
 
 			}
@@ -281,35 +289,35 @@ public class Crtanje extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int x = 0;
 				try {
-					
+
 					//int br = Integer.parseInt(tfX.getText());
 					//proveriBroj(br);
-					
+
 					if(selektovan instanceof Tacka){
 
 						x = ((Tacka) selektovan).getX();
 						((Tacka) selektovan).setX(Integer.parseInt(tfX.getText()));
-			
+
 					}else if(selektovan instanceof Linija){
-						
+
 						x = ((Linija) selektovan).gettPocetna().getX();
 						((Linija) selektovan).gettPocetna().setX(Integer.parseInt(tfX.getText()));
-						
+
 					}else if(selektovan instanceof Kvadrat){
-						
+
 						x = ((Kvadrat) selektovan).getGoreLevo().getX();
 						((Kvadrat) selektovan).getGoreLevo().setX(Integer.parseInt(tfX.getText()));
-						
+
 					}else if(selektovan instanceof Pravougaonik){
-						
+
 						x = ((Kvadrat) selektovan).getGoreLevo().getX();
 						((Kvadrat) selektovan).getGoreLevo().setX(Integer.parseInt(tfX.getText()));
-						
+
 					}else if(selektovan instanceof Krug){
-						
+
 						x = ((Krug) selektovan).getCentar().getX();
 						((Krug) selektovan).getCentar().setX(Integer.parseInt(tfX.getText()));
-						
+
 					}
 				}catch(NumberFormatException nfe){
 					tfX.setText("" + x);
@@ -320,7 +328,7 @@ public class Crtanje extends JFrame {
 				}
 
 				osveziCrtez();
-				
+
 			}
 		});
 		pnlModifikuj.add(tfX, "cell 3 2,growx");
@@ -332,30 +340,30 @@ public class Crtanje extends JFrame {
 		tfAtr1 = new JTextField();
 		tfAtr1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				int x = 0;
 				try {
 					if(selektovan instanceof Linija){
-						
+
 						x = ((Linija) selektovan).gettKrajnja().getX();
 						((Linija) selektovan).gettKrajnja().setX(Integer.parseInt(tfAtr1.getText()));
-						
+
 					}else if(selektovan instanceof Pravougaonik){
-						
+
 						x = ((Pravougaonik) selektovan).getSirina();
 						((Pravougaonik) selektovan).setSirina(Integer.parseInt(tfAtr1.getText()));
-						
+
 					}
 					else if(selektovan instanceof Kvadrat){
-						
+
 						x = ((Kvadrat) selektovan).getDuzinaStranice();
 						((Kvadrat) selektovan).setDuzinaStranice(Integer.parseInt(tfAtr1.getText()));
-						
+
 					}else if(selektovan instanceof Krug){
-						
+
 						x = ((Krug) selektovan).getR();
 						((Krug) selektovan).setR(Integer.parseInt(tfAtr1.getText()));
-						
+
 					}
 				}catch(NumberFormatException nfe){
 					tfAtr1.setText("" + x);
@@ -366,7 +374,7 @@ public class Crtanje extends JFrame {
 				}
 
 				osveziCrtez();
-				
+
 			}
 		});
 		pnlModifikuj.add(tfAtr1, "cell 5 2,growx");
@@ -398,27 +406,27 @@ public class Crtanje extends JFrame {
 
 						x = ((Tacka) selektovan).getY();
 						((Tacka) selektovan).setY(Integer.parseInt(tfY.getText()));
-			
+
 					}else if(selektovan instanceof Linija){
-						
+
 						x = ((Linija) selektovan).gettPocetna().getY();
 						((Linija) selektovan).gettPocetna().setY(Integer.parseInt(tfY.getText()));
-						
+
 					}else if(selektovan instanceof Kvadrat){
-						
+
 						x = ((Kvadrat) selektovan).getGoreLevo().getY();
 						((Kvadrat) selektovan).getGoreLevo().setY(Integer.parseInt(tfY.getText()));
-						
+
 					}else if(selektovan instanceof Pravougaonik){
-						
+
 						x = ((Kvadrat) selektovan).getGoreLevo().getY();
 						((Kvadrat) selektovan).getGoreLevo().setY(Integer.parseInt(tfY.getText()));
-						
+
 					}else if(selektovan instanceof Krug){
-						
+
 						x = ((Krug) selektovan).getCentar().getY();
 						((Krug) selektovan).getCentar().setY(Integer.parseInt(tfY.getText()));
-						
+
 					}
 				}catch(NumberFormatException nfe){
 					tfY.setText("" + x);
@@ -440,22 +448,22 @@ public class Crtanje extends JFrame {
 		tfAtr2 = new JTextField();
 		tfAtr2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 
 				int x = 0;
 				try {
 					if(selektovan instanceof Linija){
-						
+
 						x = ((Linija) selektovan).gettKrajnja().getY();
 						((Linija) selektovan).gettKrajnja().setY(Integer.parseInt(tfAtr2.getText()));
-						
+
 					}else if(selektovan instanceof Pravougaonik){
-						
+
 						x = ((Pravougaonik) selektovan).getVisina();
 						((Pravougaonik) selektovan).setVisina(Integer.parseInt(tfAtr2.getText()));
-						
+
 					}
-					
+
 				}catch(NumberFormatException nfe){
 					tfAtr2.setText("" + x);
 					JOptionPane.showMessageDialog(null, "Unos mora biti ceo broj!", "Pogresan unos", JOptionPane.ERROR_MESSAGE);
@@ -465,8 +473,8 @@ public class Crtanje extends JFrame {
 				}
 
 				osveziCrtez();
-				
-				
+
+
 			}
 		});
 		pnlModifikuj.add(tfAtr2, "cell 5 3,growx");
@@ -510,6 +518,12 @@ public class Crtanje extends JFrame {
 
 
 
+
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+
 				if(btnOdabranDugmic == btnTacka){
 					odabranOblik = new Tacka(e.getX(),e.getY(),btnBojaKonture.getBackground());					
 					odabranOblik.crtajSe(pnlCtrez.getGraphics());
@@ -528,11 +542,12 @@ public class Crtanje extends JFrame {
 					}
 				}else if (btnOdabranDugmic == btnKvadrat) {
 					//JOptionPane.showMessageDialog(null, "Kliknuto je na dugme!", "Poruka", JOptionPane.ERROR_MESSAGE);
-					String inp = JOptionPane.showInputDialog("Unesi stranicu");
+					String inp = JOptionPane.showInputDialog(null,"Unesite duzinu stranice:","Kvadrat, unos duzine stranice:", JOptionPane.QUESTION_MESSAGE);
 					boolean p = true;
 					while(p){
 						try {
 							int stranica = Integer.parseInt(inp);
+							Oblik.proveriBroj(stranica);
 							odabranOblik = new Kvadrat(new Tacka(e.getX(),e.getY()), stranica,btnBojaKonture.getBackground(),btnBojaUnutrasnjosti.getBackground());
 							Kvadrat kv = (Kvadrat) odabranOblik;
 							kv.crtajSe(pnlCtrez.getGraphics());
@@ -541,34 +556,36 @@ public class Crtanje extends JFrame {
 							//System.out.println(ex.getMessage());
 							if(ex.getMessage() == "null")
 								return;
-							inp = JOptionPane.showInputDialog("Unos mora biti ceo broj, unesi stranicu:");
+							inp = JOptionPane.showInputDialog(null,"Unos mora biti ceo broj veci od 0! Unesite duzinu stranice:","Kvadrat, unos duzine stranice:", JOptionPane.QUESTION_MESSAGE);
 						}
 					}
 
 
 				}else if (btnOdabranDugmic == btnPravougaonik) {
 					//JOptionPane.showMessageDialog(null, "Kliknuto je na dugme!", "Poruka", JOptionPane.ERROR_MESSAGE);
-					String inpSirina = JOptionPane.showInputDialog("Unesi sirinu");
+					String inpSirina = JOptionPane.showInputDialog(null,"Unesite sirinu:","Pravougaonik, unos sirine", JOptionPane.QUESTION_MESSAGE);
 					int sirina = 0;
 					boolean p = true;
 					while(p){
 						try {
 							sirina = Integer.parseInt(inpSirina);
+							Oblik.proveriBroj(sirina);
 							p = false;
 						} catch (Exception ex) {
 							if(ex.getMessage() == "null")
 								return;
-							inpSirina = JOptionPane.showInputDialog("Unos mora biti ceo broj, unesi sirinu:");
+							inpSirina = JOptionPane.showInputDialog(null,"Unos mora biti ceo broj veci od 0! Unesite sirinu:","Pravougaonik, unos sirine", JOptionPane.QUESTION_MESSAGE);
 						}
 					}
 
 
-					String inpVisina = JOptionPane.showInputDialog("Unesi visinu");
-					int visina;
+					String inpVisina = JOptionPane.showInputDialog(null,"Unesite visinu:","Pravougaonik, unos visine", JOptionPane.QUESTION_MESSAGE);
+					int visina = 0;
 					p = true;
 					while(p){
 						try {
 							visina = Integer.parseInt(inpVisina);
+							Oblik.proveriBroj(visina);
 							odabranOblik = new Pravougaonik(new Tacka(e.getX(),e.getY()), sirina, visina,btnBojaKonture.getBackground(),btnBojaUnutrasnjosti.getBackground());
 							Pravougaonik pr = (Pravougaonik) odabranOblik;
 							pr.crtajSe(pnlCtrez.getGraphics());
@@ -576,18 +593,19 @@ public class Crtanje extends JFrame {
 						} catch (Exception ex) {
 							if(ex.getMessage() == "null")
 								return;
-							inpSirina = JOptionPane.showInputDialog("Unos mora biti ceo broj, unesi stranicu:");
+							inpVisina = JOptionPane.showInputDialog(null,"Unos mora biti ceo broj veci od 0! Unesite visinu:","Pravougaonik, unos visine", JOptionPane.QUESTION_MESSAGE);
 						}
 					}
 
 
 				}else if (btnOdabranDugmic == btnKrug) {
 					//JOptionPane.showMessageDialog(null, "Kliknuto je na dugme!", "Poruka", JOptionPane.ERROR_MESSAGE);
-					String inp = JOptionPane.showInputDialog("Unesi poluprecnik");
+					String inpR = JOptionPane.showInputDialog(null,"Unesite poluprecnik:","Krug, unos poluprecnika", JOptionPane.QUESTION_MESSAGE);
 					boolean p = true;
 					while(p){
 						try {
-							int r = Integer.parseInt(inp);
+							int r = Integer.parseInt(inpR);
+							Oblik.proveriBroj(r);
 							odabranOblik = new Krug(new Tacka(e.getX(),e.getY()), r,btnBojaKonture.getBackground(), btnBojaUnutrasnjosti.getBackground());
 							Krug k = (Krug) odabranOblik;
 							k.crtajSe(pnlCtrez.getGraphics());
@@ -596,7 +614,7 @@ public class Crtanje extends JFrame {
 							//System.out.println(ex.getMessage());
 							if(ex.getMessage() == "null")
 								return;
-							inp = JOptionPane.showInputDialog("Unos mora biti ceo broj, unesi poluprecnik:");
+							inpR = JOptionPane.showInputDialog(null,"Unos mora biti ceo broj veci od 0! Unesite poluprecnik:","Krug, unos poluprecnika", JOptionPane.QUESTION_MESSAGE);
 						}
 					}
 
@@ -639,13 +657,6 @@ public class Crtanje extends JFrame {
 				System.out.println("\n Oblici u staku:");
 				for(int i = stakOblika.size()-1; i>= 0; i--)
 					System.out.println(stakOblika.get(i));
-
-
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {
-				System.out.println("presovano");
-
 
 
 
@@ -712,7 +723,7 @@ public class Crtanje extends JFrame {
 
 
 	private void osveziUIKomande(Boolean b){
-		
+
 		btnObrisi.setEnabled(b);
 		pnlModifikuj.setVisible(b);
 
@@ -813,8 +824,8 @@ public class Crtanje extends JFrame {
 		if(c!=null)
 			btn.setBackground(c);
 	}
-	
-	
+
+
 
 
 

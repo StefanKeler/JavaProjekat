@@ -7,9 +7,9 @@ public abstract class Oblik implements Comparable{
 	private Color boja = Color.BLACK;
 	private String bojaStr = "crna";
 	private boolean selektovan;
-	
+
 	public Oblik(){
-		
+
 	}
 	public Oblik(Color boja){
 		this.boja = boja;
@@ -18,7 +18,7 @@ public abstract class Oblik implements Comparable{
 	public abstract void crtajSe(Graphics g);
 	public abstract void selektovan(Graphics g);
 	public abstract boolean sadrzi(int x, int y);
-	
+
 	public static Color pronadjiBoju(String boja){
 		if(boja.equalsIgnoreCase("crna"))
 			return Color.BLACK;
@@ -37,7 +37,7 @@ public abstract class Oblik implements Comparable{
 		else
 			return Color.BLACK;
 	}
-	
+
 	public Color getBoja() {
 		return boja;
 	}
@@ -51,7 +51,7 @@ public abstract class Oblik implements Comparable{
 	public void setSelektovan(boolean selektovan) {
 		this.selektovan = selektovan;
 	}
-	
+
 	public String getBojaStr() {
 		return bojaStr;
 	}
@@ -59,5 +59,13 @@ public abstract class Oblik implements Comparable{
 	public void setBojaStr(String bojaStr) {
 		this.bojaStr = bojaStr;
 	}
-	
+
+	public static boolean proveriBroj(int br)throws Exception{
+		if(br<=0)
+			throw new Exception();
+		else
+			return true;
+		
+	}
+
 }

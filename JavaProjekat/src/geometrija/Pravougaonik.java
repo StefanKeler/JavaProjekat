@@ -47,7 +47,7 @@ public class Pravougaonik extends Kvadrat{
 	}
 
 	public boolean equals(Object obj){
-		if(obj instanceof Kvadrat){
+		if(obj instanceof Pravougaonik){
 			Pravougaonik pomocni=(Pravougaonik) obj;
 			if(this.goreLevo.equals(pomocni.goreLevo) && this.duzinaStranice==pomocni.duzinaStranice && this.sirina==pomocni.sirina)
 				return true;
@@ -115,6 +115,7 @@ public class Pravougaonik extends Kvadrat{
 			this.sirina = sirina;
 		
 	}
-
+	
+	
 
 }
