@@ -96,7 +96,7 @@ public class Sortiranje extends JFrame {
 				boolean p = true;
 				while(p){
 					try {
-						String nizReci[] = inp.split(",");
+						String nizReci[] = inp.split(", ");
 						Kvadrat kv = new Kvadrat(new Tacka(Integer.parseInt(nizReci[0]), Integer.parseInt(nizReci[1])), Integer.parseInt(nizReci[2]), nizReci[3],nizReci[4]);
 						lista.add(kv);
 						listaSortirana.add(kv);
