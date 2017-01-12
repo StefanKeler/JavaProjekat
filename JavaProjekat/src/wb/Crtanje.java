@@ -130,8 +130,7 @@ public class Crtanje extends JFrame {
 		pnlOblici.add(label, "cell 0 0 2 1,alignx center");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 
-		//Dugmici za oblike
-
+		
 		JButton btnTacka = new JButton("Tacka");
 
 		btnTacka.addActionListener(new ActionListener() {
@@ -226,8 +225,6 @@ public class Crtanje extends JFrame {
 		btnObrisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				//System.out.println(selektovan.equals(stakOblika.get(0)));
-
 
 				Object[] opcije = {"DA","NE"};
 				int n = JOptionPane.showOptionDialog(null,"Da li sigurni da zelite da obisete? ","Upozorenje",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,opcije,opcije[1]);
@@ -289,9 +286,6 @@ public class Crtanje extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int x = 0;
 				try {
-
-					//int br = Integer.parseInt(tfX.getText());
-					//proveriBroj(br);
 
 					if(selektovan instanceof Tacka){
 
@@ -541,8 +535,7 @@ public class Crtanje extends JFrame {
 						iteracija = 0;
 					}
 				}else if (btnOdabranDugmic == btnKvadrat) {
-					//JOptionPane.showMessageDialog(null, "Kliknuto je na dugme!", "Poruka", JOptionPane.ERROR_MESSAGE);
-					String inp = JOptionPane.showInputDialog(null,"Unesite duzinu stranice:","Kvadrat, unos duzine stranice:", JOptionPane.QUESTION_MESSAGE);
+						String inp = JOptionPane.showInputDialog(null,"Unesite duzinu stranice:","Kvadrat, unos duzine stranice:", JOptionPane.QUESTION_MESSAGE);
 					boolean p = true;
 					while(p){
 						try {
@@ -553,7 +546,7 @@ public class Crtanje extends JFrame {
 							kv.crtajSe(pnlCtrez.getGraphics());
 							p = false;
 						} catch (Exception ex) {
-							//System.out.println(ex.getMessage());
+							
 							if(ex.getMessage() == "null")
 								return;
 							inp = JOptionPane.showInputDialog(null,"Unos mora biti ceo broj veci od 0! Unesite duzinu stranice:","Kvadrat, unos duzine stranice:", JOptionPane.QUESTION_MESSAGE);
@@ -562,7 +555,6 @@ public class Crtanje extends JFrame {
 
 
 				}else if (btnOdabranDugmic == btnPravougaonik) {
-					//JOptionPane.showMessageDialog(null, "Kliknuto je na dugme!", "Poruka", JOptionPane.ERROR_MESSAGE);
 					String inpSirina = JOptionPane.showInputDialog(null,"Unesite sirinu:","Pravougaonik, unos sirine", JOptionPane.QUESTION_MESSAGE);
 					int sirina = 0;
 					boolean p = true;
@@ -599,7 +591,6 @@ public class Crtanje extends JFrame {
 
 
 				}else if (btnOdabranDugmic == btnKrug) {
-					//JOptionPane.showMessageDialog(null, "Kliknuto je na dugme!", "Poruka", JOptionPane.ERROR_MESSAGE);
 					String inpR = JOptionPane.showInputDialog(null,"Unesite poluprecnik:","Krug, unos poluprecnika", JOptionPane.QUESTION_MESSAGE);
 					boolean p = true;
 					while(p){
@@ -611,7 +602,7 @@ public class Crtanje extends JFrame {
 							k.crtajSe(pnlCtrez.getGraphics());
 							p = false;
 						} catch (Exception ex) {
-							//System.out.println(ex.getMessage());
+							
 							if(ex.getMessage() == "null")
 								return;
 							inpR = JOptionPane.showInputDialog(null,"Unos mora biti ceo broj veci od 0! Unesite poluprecnik:","Krug, unos poluprecnika", JOptionPane.QUESTION_MESSAGE);
@@ -820,7 +811,7 @@ public class Crtanje extends JFrame {
 	private void odabirBoje(JButton btn){
 		JColorChooser jcc = new JColorChooser();
 		Color c = jcc.showDialog(null, "Izaberite boju", Color.BLACK);
-		//System.out.println(c);
+		
 		if(c!=null)
 			btn.setBackground(c);
 	}
