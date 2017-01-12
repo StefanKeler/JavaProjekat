@@ -238,7 +238,7 @@ public class DijalogZaUnos extends JDialog {
 					}catch (Exception ex) {
 						System.out.println("x ne valja");
 						uzeoFokus = tfX;
-						poruka = "X mora biti broj >= 0";
+						poruka = "X mora biti broj > 0";
 
 					}
 
@@ -273,7 +273,7 @@ public class DijalogZaUnos extends JDialog {
 					}catch (Exception ex) {
 
 						uzeoFokus = tfY;
-						poruka = "Y mora biti broj >= 0";
+						poruka = "Y mora biti broj > 0";
 						System.out.println("y ne valja");
 					}
 
@@ -309,7 +309,7 @@ public class DijalogZaUnos extends JDialog {
 					}catch (Exception ex) {
 
 						uzeoFokus = tfDuzinaStranice;
-						poruka = "DuzinaStranice mora biti broj >= 0";
+						poruka = "DuzinaStranice mora biti broj > 0";
 						System.out.println("tfDuzinaStranice ne valja");
 					}
 

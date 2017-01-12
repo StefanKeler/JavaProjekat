@@ -87,7 +87,7 @@ public class Stek extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Kvadrat kv = stek.pop();
-					listKvadrata.remove(kv.opis());
+					listKvadrata.remove(listKvadrata.getItemCount()-1);
 					JOptionPane.showMessageDialog(null, kv.opis(), "Sa steka se izbacuje", JOptionPane.INFORMATION_MESSAGE);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
