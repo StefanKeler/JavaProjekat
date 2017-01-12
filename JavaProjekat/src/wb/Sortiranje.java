@@ -33,10 +33,10 @@ public class Sortiranje extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	
+
 	ArrayList<Kvadrat> lista = new ArrayList<Kvadrat>();
 	ArrayList<Kvadrat> listaSortirana = new ArrayList<Kvadrat>();
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -61,78 +61,69 @@ public class Sortiranje extends JFrame {
 		pnlGlavni.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(pnlGlavni);
 		pnlGlavni.setLayout(new BorderLayout(0, 0));
-		
+
 		JLabel lblAplikacijaZaManipulaciju = new JLabel("Aplikacija za manipulaciju liste sa kvadratima");
 		lblAplikacijaZaManipulaciju.setVerticalAlignment(SwingConstants.TOP);
 		lblAplikacijaZaManipulaciju.setHorizontalAlignment(SwingConstants.CENTER);
 		pnlGlavni.add(lblAplikacijaZaManipulaciju, BorderLayout.NORTH);
-		
+
 		JPanel pnlSredina = new JPanel();
 		pnlGlavni.add(pnlSredina, BorderLayout.CENTER);
 		pnlSredina.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		JPanel pnlElementi = new JPanel();
 		pnlSredina.add(pnlElementi);
 		pnlElementi.setLayout(new MigLayout("", "[500.00px][500.00px]", "[][450.00px][]"));
-		
+
 		List listLista = new List();
 		pnlElementi.add(listLista, "cell 0 1,grow");
-		
+
 		List listSortiranaLista = new List();
 		pnlElementi.add(listSortiranaLista, "cell 1 1,grow");
-		
+
 		JLabel lblLista = new JLabel("Lista");
 		pnlElementi.add(lblLista, "cell 0 2,alignx center");
-		
+
 		JLabel lblSortiranaLista = new JLabel("Sortirana lista");
 		pnlElementi.add(lblSortiranaLista, "cell 1 2,alignx center");
-		
+
 		JButton btnDodajElementU = new JButton("Dodaj element u listu");
 		pnlElementi.add(btnDodajElementU, "cell 0 0 2 1,growx");
 		btnDodajElementU.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				DijalogZaUnos d = new DijalogZaUnos();
+				d.setVisible(true);
+				String inp = d.getText();
+			
 				
-				String inp = JOptionPane.showInputDialog("Unesi kvadrat u formatu: X, Y koordinate tacke gore levo, duzina stranice, boja ivice, boja unutrasnjosti");
-				boolean p = true;
-				while(p){
-					try {
-						String nizReci[] = inp.split(", ");
-						Kvadrat kv = new Kvadrat(new Tacka(Integer.parseInt(nizReci[0]), Integer.parseInt(nizReci[1])), Integer.parseInt(nizReci[2]), nizReci[3],nizReci[4]);
-						lista.add(kv);
-						listaSortirana.add(kv);
-						p = false;
-					} catch (Exception ex) {
-						//System.out.println(ex.getMessage());
-						if(ex.getMessage() == null)
-							return;
-						inp = JOptionPane.showInputDialog("Greska, unos mora biti u formi: x, y, duzina stranice, boja ivice, boja unutrasnjosti");
-					}
+				if(d.pritisnutoOk == false){
+					System.out.println("retun");
+					return;
+				}else{
+
+					String nizReci[] = inp.split(", ");
+					Kvadrat kv = new Kvadrat(new Tacka(Integer.parseInt(nizReci[0]), Integer.parseInt(nizReci[1])), Integer.parseInt(nizReci[2]), nizReci[3],nizReci[4]);
+					lista.add(kv);
+					listaSortirana.add(kv);
+
+
+					listLista.removeAll();
+					listSortiranaLista.removeAll();
+					listaSortirana.sort(null);
 				}
-				
-				listLista.removeAll();
-				listSortiranaLista.removeAll();
-				listaSortirana.sort(null);
-				
-				for (Kvadrat kv : lista) {
-					listLista.add(kv.opis());
+
+				for (Kvadrat k : lista) {
+					listLista.add(k.opis());
 				}
-				
-				for (Kvadrat kv : listaSortirana) {
-					listSortiranaLista.add(kv.opis());
+
+				for (Kvadrat k : listaSortirana) {
+					listSortiranaLista.add(k.opis());
 				}
-				
-				/*Kvadrat[] k = (Kvadrat[]) lista.toArray();
-				
-				Arrays.sort(k);
-				
-				for(Kvadrat kv : k){
-					listSortiranaLista.add(kv.opis());
-				}
-				*/
+
 			}
 		});
-		
-		
+
+
 	}
 
 }

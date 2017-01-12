@@ -52,7 +52,7 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 	}
 	
 	public String opis(){
-		return "gornji levi ugao=("+goreLevo.getX()+","+goreLevo.getY()+"), stranica="+duzinaStranice + ", boja konture: \"" + getBojaStr() + "\", boja unutrasnjosti: \" " + getBojaUnutrasnjostiStr() + "\"";
+		return "gornji levi ugao=("+goreLevo.getX()+","+goreLevo.getY()+"), stranica="+duzinaStranice + ", boja konture: \"" + getBojaStr() + "\", boja unutrasnjosti: \"" + getBojaUnutrasnjostiStr() + "\"";
 	}
 
 	public boolean equals(Object obj){

@@ -214,15 +214,98 @@ public class Crtanje extends JFrame {
 		pnlKomande.add(lblKomande, "cell 0 0,alignx center,aligny center");
 
 		btnSelektuj = new JButton("Selektuj");
-		btnSelektuj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				odaberiDugme((JButton)e.getSource());
-			}
-		});
+	
 		pnlKomande.add(btnSelektuj, "cell 0 1,grow");
 
 		btnObrisi = new JButton("Obrisi");
 		btnObrisi.setEnabled(false);
+		
+		pnlKomande.add(btnObrisi, "cell 0 2,grow");
+
+		pnlModifikuj = new JPanel();
+		pnlPalete.add(pnlModifikuj);
+		pnlModifikuj.setLayout(new MigLayout("", "[][35.00][][35.00,grow][][35.00,grow]", "[][][][][]"));
+
+		JLabel lblModifikuj = new JLabel("Modifikuj");
+		pnlModifikuj.add(lblModifikuj, "cell 0 0 6 1,alignx center");
+
+		JLabel lblBoja = new JLabel("Boja");
+		pnlModifikuj.add(lblBoja, "cell 0 1 2 1,alignx center");
+
+		lblTacka = new JLabel("Tacka");
+		pnlModifikuj.add(lblTacka, "cell 2 1 2 1,alignx center");
+
+		lblAtrNaslov = new JLabel("atr");
+		pnlModifikuj.add(lblAtrNaslov, "cell 4 1 2 1,alignx center");
+
+		JLabel lblKonture = new JLabel("konture:");
+		pnlModifikuj.add(lblKonture, "cell 0 2,alignx right");
+
+		btnKonture = new JButton("");
+		
+		pnlModifikuj.add(btnKonture, "cell 1 2,grow");
+
+		JLabel lblX = new JLabel(" x:");
+		pnlModifikuj.add(lblX, "cell 2 2,alignx right");
+
+		tfX = new JTextField();
+		
+		pnlModifikuj.add(tfX, "cell 3 2,growx");
+		tfX.setColumns(10);
+
+		lblAtr1 = new JLabel(" atr1:");
+		pnlModifikuj.add(lblAtr1, "cell 4 2,alignx right");
+
+		tfAtr1 = new JTextField();
+		
+		pnlModifikuj.add(tfAtr1, "cell 5 2,growx");
+		tfAtr1.setColumns(10);
+
+		lblUnutrasnjosti = new JLabel("unutrasnjosti:");
+		pnlModifikuj.add(lblUnutrasnjosti, "cell 0 3,alignx right");
+
+		btnUnutrasnjosti = new JButton("");
+	
+		pnlModifikuj.add(btnUnutrasnjosti, "cell 1 3,grow");
+
+		JLabel lblY = new JLabel("  y:");
+		pnlModifikuj.add(lblY, "cell 2 3,alignx right");
+
+		tfY = new JTextField();
+		
+		pnlModifikuj.add(tfY, "cell 3 3,growx");
+		tfY.setColumns(10);
+
+		lblAtr2 = new JLabel(" atr2:");
+		pnlModifikuj.add(lblAtr2, "cell 4 3,alignx right");
+
+		tfAtr2 = new JTextField();
+		
+		pnlModifikuj.add(tfAtr2, "cell 5 3,growx");
+		tfAtr2.setColumns(10);
+
+		lblPoruka = new JLabel("posle unosa pritisnite enter za prikaz izmena");
+		pnlModifikuj.add(lblPoruka, "cell 0 4 6 1,alignx center");
+
+		pnlModifikuj.setVisible(false);
+
+		pnlCtrez = new JPanel();
+
+
+		pnlGlavni.add(pnlCtrez, BorderLayout.CENTER);
+
+		JPanel pnlStanje = new JPanel();
+		pnlGlavni.add(pnlStanje, BorderLayout.SOUTH);
+		pnlStanje.setLayout(new GridLayout(0, 2, 0, 0));
+
+		lblKoordinate = new JLabel("koor:");
+		pnlStanje.add(lblKoordinate);
+
+		lblPlatno = new JLabel("platno: ");
+		pnlStanje.add(lblPlatno);
+		
+		
+		
 		btnObrisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -249,28 +332,15 @@ public class Crtanje extends JFrame {
 
 			}
 		});
-		pnlKomande.add(btnObrisi, "cell 0 2,grow");
-
-		pnlModifikuj = new JPanel();
-		pnlPalete.add(pnlModifikuj);
-		pnlModifikuj.setLayout(new MigLayout("", "[][35.00][][35.00,grow][][35.00,grow]", "[][][][][]"));
-
-		JLabel lblModifikuj = new JLabel("Modifikuj");
-		pnlModifikuj.add(lblModifikuj, "cell 0 0 6 1,alignx center");
-
-		JLabel lblBoja = new JLabel("Boja");
-		pnlModifikuj.add(lblBoja, "cell 0 1 2 1,alignx center");
-
-		lblTacka = new JLabel("Tacka");
-		pnlModifikuj.add(lblTacka, "cell 2 1 2 1,alignx center");
-
-		lblAtrNaslov = new JLabel("atr");
-		pnlModifikuj.add(lblAtrNaslov, "cell 4 1 2 1,alignx center");
-
-		JLabel lblKonture = new JLabel("konture:");
-		pnlModifikuj.add(lblKonture, "cell 0 2,alignx right");
-
-		btnKonture = new JButton("");
+		
+		btnUnutrasnjosti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				odabirBoje((JButton)e.getSource());
+				((PovrsinskiOblik) selektovan).setBojaUnutrasnjosti(btnUnutrasnjosti.getBackground());
+				osveziCrtez();
+			}
+		});
+		
 		btnKonture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				odabirBoje((JButton)e.getSource());
@@ -279,12 +349,7 @@ public class Crtanje extends JFrame {
 
 			}
 		});
-		pnlModifikuj.add(btnKonture, "cell 1 2,grow");
-
-		JLabel lblX = new JLabel(" x:");
-		pnlModifikuj.add(lblX, "cell 2 2,alignx right");
-
-		tfX = new JTextField();
+		
 		tfX.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int x = 0;
@@ -331,72 +396,7 @@ public class Crtanje extends JFrame {
 
 			}
 		});
-		pnlModifikuj.add(tfX, "cell 3 2,growx");
-		tfX.setColumns(10);
-
-		lblAtr1 = new JLabel(" atr1:");
-		pnlModifikuj.add(lblAtr1, "cell 4 2,alignx right");
-
-		tfAtr1 = new JTextField();
-		tfAtr1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				int x = 0;
-				try {
-					if(selektovan instanceof Linija){
-
-						x = ((Linija) selektovan).gettKrajnja().getX();
-						((Linija) selektovan).gettKrajnja().setX(Integer.parseInt(tfAtr1.getText()));
-
-					}else if(selektovan instanceof Pravougaonik){
-
-						x = ((Pravougaonik) selektovan).getSirina();
-						((Pravougaonik) selektovan).setSirina(Integer.parseInt(tfAtr1.getText()));
-
-					}
-					else if(selektovan instanceof Kvadrat){
-
-						x = ((Kvadrat) selektovan).getDuzinaStranice();
-						((Kvadrat) selektovan).setDuzinaStranice(Integer.parseInt(tfAtr1.getText()));
-
-					}else if(selektovan instanceof Krug){
-
-						x = ((Krug) selektovan).getR();
-						((Krug) selektovan).setR(Integer.parseInt(tfAtr1.getText()));
-
-					}
-				}catch(NumberFormatException nfe){
-					tfAtr1.setText("" + x);
-					JOptionPane.showMessageDialog(null, "Unos mora biti ceo broj!", "Pogresan unos", JOptionPane.ERROR_MESSAGE);
-				}catch ( Exception e1) {
-					tfAtr1.setText("" + x);
-					JOptionPane.showMessageDialog(null, e1.getMessage(), "Pogresan unos", JOptionPane.ERROR_MESSAGE);
-				}
-
-				osveziCrtez();
-
-			}
-		});
-		pnlModifikuj.add(tfAtr1, "cell 5 2,growx");
-		tfAtr1.setColumns(10);
-
-		lblUnutrasnjosti = new JLabel("unutrasnjosti:");
-		pnlModifikuj.add(lblUnutrasnjosti, "cell 0 3,alignx right");
-
-		btnUnutrasnjosti = new JButton("");
-		btnUnutrasnjosti.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				odabirBoje((JButton)e.getSource());
-				((PovrsinskiOblik) selektovan).setBojaUnutrasnjosti(btnUnutrasnjosti.getBackground());
-				osveziCrtez();
-			}
-		});
-		pnlModifikuj.add(btnUnutrasnjosti, "cell 1 3,grow");
-
-		JLabel lblY = new JLabel("  y:");
-		pnlModifikuj.add(lblY, "cell 2 3,alignx right");
-
-		tfY = new JTextField();
+		
 		tfY.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -439,13 +439,47 @@ public class Crtanje extends JFrame {
 				osveziCrtez();
 			}
 		});
-		pnlModifikuj.add(tfY, "cell 3 3,growx");
-		tfY.setColumns(10);
+		
+		tfAtr1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-		lblAtr2 = new JLabel(" atr2:");
-		pnlModifikuj.add(lblAtr2, "cell 4 3,alignx right");
+				int x = 0;
+				try {
+					if(selektovan instanceof Linija){
 
-		tfAtr2 = new JTextField();
+						x = ((Linija) selektovan).gettKrajnja().getX();
+						((Linija) selektovan).gettKrajnja().setX(Integer.parseInt(tfAtr1.getText()));
+
+					}else if(selektovan instanceof Pravougaonik){
+
+						x = ((Pravougaonik) selektovan).getSirina();
+						((Pravougaonik) selektovan).setSirina(Integer.parseInt(tfAtr1.getText()));
+
+					}
+					else if(selektovan instanceof Kvadrat){
+
+						x = ((Kvadrat) selektovan).getDuzinaStranice();
+						((Kvadrat) selektovan).setDuzinaStranice(Integer.parseInt(tfAtr1.getText()));
+
+					}else if(selektovan instanceof Krug){
+
+						x = ((Krug) selektovan).getR();
+						((Krug) selektovan).setR(Integer.parseInt(tfAtr1.getText()));
+
+					}
+				}catch(NumberFormatException nfe){
+					tfAtr1.setText("" + x);
+					JOptionPane.showMessageDialog(null, "Unos mora biti ceo broj!", "Pogresan unos", JOptionPane.ERROR_MESSAGE);
+				}catch ( Exception e1) {
+					tfAtr1.setText("" + x);
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "Pogresan unos", JOptionPane.ERROR_MESSAGE);
+				}
+
+				osveziCrtez();
+
+			}
+		});
+		
 		tfAtr2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -477,26 +511,8 @@ public class Crtanje extends JFrame {
 
 			}
 		});
-		pnlModifikuj.add(tfAtr2, "cell 5 3,growx");
-		tfAtr2.setColumns(10);
 
-		lblPoruka = new JLabel("posle unosa pritisnite enter za prikaz izmena");
-		pnlModifikuj.add(lblPoruka, "cell 0 4 6 1,alignx center");
-
-		pnlModifikuj.setVisible(false);
-
-		pnlCtrez = new JPanel();
-		pnlCtrez.addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentResized(ComponentEvent arg0) {
-				lblPlatno.setText("platno: " + pnlCtrez.getWidth() + ":" + pnlCtrez.getHeight());
-				osveziCrtez();
-
-			}
-		});
-
-
-
+		
 		pnlCtrez.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
@@ -507,20 +523,17 @@ public class Crtanje extends JFrame {
 
 
 
-
-		pnlCtrez.addMouseListener(new MouseAdapter() {
-
-
-
-
-			public void mouseClicked(MouseEvent e) {
-
-
-
-
+		pnlCtrez.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent arg0) {
+				lblPlatno.setText("platno: " + pnlCtrez.getWidth() + ":" + pnlCtrez.getHeight());
+				osveziCrtez();
 
 			}
-			@Override
+		});
+		
+		pnlCtrez.addMouseListener(new MouseAdapter() {
+
 			public void mousePressed(MouseEvent e) {
 
 
@@ -666,19 +679,7 @@ public class Crtanje extends JFrame {
 				lblKoordinate.setText("koor: ");
 			}
 		});
-		pnlGlavni.add(pnlCtrez, BorderLayout.CENTER);
-
-		JPanel pnlStanje = new JPanel();
-		pnlGlavni.add(pnlStanje, BorderLayout.SOUTH);
-		pnlStanje.setLayout(new GridLayout(0, 2, 0, 0));
-
-		lblKoordinate = new JLabel("koor:");
-		pnlStanje.add(lblKoordinate);
-
-		lblPlatno = new JLabel("platno: ");
-		pnlStanje.add(lblPlatno);
-
-
+		
 
 
 	}
