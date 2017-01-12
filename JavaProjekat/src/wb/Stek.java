@@ -87,7 +87,7 @@ public class Stek extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Kvadrat kv = stek.pop();
-					listKvadrata.remove(listKvadrata.getItemCount()-1);
+					listKvadrata.remove(0);
 					JOptionPane.showMessageDialog(null, kv.opis(), "Sa steka se izbacuje", JOptionPane.INFORMATION_MESSAGE);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -116,7 +116,7 @@ public class Stek extends JFrame {
 					String nizReci[] = inp.split(", ");
 					Kvadrat kv = new Kvadrat(new Tacka(Integer.parseInt(nizReci[0]), Integer.parseInt(nizReci[1])), Integer.parseInt(nizReci[2]), nizReci[3],nizReci[4]);
 					stek.push(kv);
-					listKvadrata.add(kv.opis());
+					listKvadrata.add(kv.opis(),0);
 
 
 					
