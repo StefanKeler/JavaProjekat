@@ -48,6 +48,8 @@ import java.awt.event.ComponentEvent;
 import java.awt.FlowLayout;
 import java.awt.Canvas;
 import javax.swing.JTextField;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 
@@ -108,6 +110,12 @@ public class Crtanje extends JFrame {
 
 
 	public Crtanje() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				osveziCrtez();
+			}
+		});
 		setTitle("Crtanje, Keler Stefan IT 27-2015");
 
 
