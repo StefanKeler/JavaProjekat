@@ -55,6 +55,9 @@ import java.awt.event.WindowEvent;
 
 public class Crtanje extends JFrame {
 
+	
+	private PanelZaCrtanje panelZaCrtanje;
+	
 	private JPanel pnlGlavni;
 	private JPanel pnlModifikuj;
 
@@ -65,7 +68,7 @@ public class Crtanje extends JFrame {
 
 	private JLabel lblKoordinate;
 	private JLabel lblPlatno;
-	private JPanel pnlCtrez;
+	private PanelZaCrtanje pnlCtrez;
 
 	private JButton btnSelektuj, btnObrisi;
 
@@ -110,15 +113,10 @@ public class Crtanje extends JFrame {
 
 
 	public Crtanje() {
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowActivated(WindowEvent arg0) {
-				osveziCrtez();
-			}
-		});
+		
 		setTitle("Crtanje, Keler Stefan IT 27-2015");
 
-
+		panelZaCrtanje = new PanelZaCrtanje();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 600);
@@ -240,8 +238,9 @@ public class Crtanje extends JFrame {
 				if(n == 0){
 					System.out.println("brisem: " + selektovan);
 					stakOblika.removeElement(selektovan);
+					pnlCtrez.remove(selektovan);
 					selektovan = null;
-					osveziCrtez();
+					
 
 
 					osveziUIKomande(false);
@@ -280,7 +279,7 @@ public class Crtanje extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				odabirBoje((JButton)e.getSource());
 				selektovan.setBoja(btnKonture.getBackground());
-				osveziCrtez();
+				repaint();
 
 			}
 		});
@@ -329,7 +328,7 @@ public class Crtanje extends JFrame {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "Pogresan unos", JOptionPane.ERROR_MESSAGE);
 				}
 
-				osveziCrtez();
+				repaint();
 
 			}
 		});
@@ -375,7 +374,7 @@ public class Crtanje extends JFrame {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "Pogresan unos", JOptionPane.ERROR_MESSAGE);
 				}
 
-				osveziCrtez();
+				repaint();
 
 			}
 		});
@@ -390,7 +389,7 @@ public class Crtanje extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				odabirBoje((JButton)e.getSource());
 				((PovrsinskiOblik) selektovan).setBojaUnutrasnjosti(btnUnutrasnjosti.getBackground());
-				osveziCrtez();
+				repaint();
 			}
 		});
 		pnlModifikuj.add(btnUnutrasnjosti, "cell 1 3,grow");
@@ -438,7 +437,7 @@ public class Crtanje extends JFrame {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "Pogresan unos", JOptionPane.ERROR_MESSAGE);
 				}
 
-				osveziCrtez();
+				repaint();
 			}
 		});
 		pnlModifikuj.add(tfY, "cell 3 3,growx");
@@ -474,7 +473,7 @@ public class Crtanje extends JFrame {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "Pogresan unos", JOptionPane.ERROR_MESSAGE);
 				}
 
-				osveziCrtez();
+				repaint();
 
 
 			}
@@ -487,16 +486,8 @@ public class Crtanje extends JFrame {
 
 		pnlModifikuj.setVisible(false);
 
-		pnlCtrez = new JPanel();
-		pnlCtrez.addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentResized(ComponentEvent arg0) {
-				lblPlatno.setText("platno: " + pnlCtrez.getWidth() + ":" + pnlCtrez.getHeight());
-				osveziCrtez();
-
-			}
-		});
-
+		pnlCtrez = new PanelZaCrtanje();
+		
 
 
 		pnlCtrez.addMouseMotionListener(new MouseMotionAdapter() {
@@ -513,22 +504,13 @@ public class Crtanje extends JFrame {
 		pnlCtrez.addMouseListener(new MouseAdapter() {
 
 
-
-
-			public void mouseClicked(MouseEvent e) {
-
-
-
-
-
-			}
-			@Override
 			public void mousePressed(MouseEvent e) {
 
 
 				if(btnOdabranDugmic == btnTacka){
 					odabranOblik = new Tacka(e.getX(),e.getY(),btnBojaKonture.getBackground());					
 					odabranOblik.crtajSe(pnlCtrez.getGraphics());
+					pnlCtrez.add(odabranOblik);
 
 				}else if (btnOdabranDugmic == btnLinija){
 
@@ -540,6 +522,7 @@ public class Crtanje extends JFrame {
 						Linija l = (Linija) odabranOblik;
 						l.settKrajnja(new Tacka(e.getX(),e.getY()));
 						l.crtajSe(pnlCtrez.getGraphics());
+						pnlCtrez.add(l);
 						iteracija = 0;
 					}
 				}else if (btnOdabranDugmic == btnKvadrat) {
@@ -552,6 +535,7 @@ public class Crtanje extends JFrame {
 							odabranOblik = new Kvadrat(new Tacka(e.getX(),e.getY()), stranica,btnBojaKonture.getBackground(),btnBojaUnutrasnjosti.getBackground());
 							Kvadrat kv = (Kvadrat) odabranOblik;
 							kv.crtajSe(pnlCtrez.getGraphics());
+							pnlCtrez.add(kv);
 							p = false;
 						} catch (Exception ex) {
 							
@@ -590,6 +574,7 @@ public class Crtanje extends JFrame {
 							Pravougaonik pr = (Pravougaonik) odabranOblik;
 							pr.crtajSe(pnlCtrez.getGraphics());
 							p = false;
+							pnlCtrez.add(pr);
 						} catch (Exception ex) {
 							if(ex.getMessage() == "null")
 								return;
@@ -608,6 +593,7 @@ public class Crtanje extends JFrame {
 							odabranOblik = new Krug(new Tacka(e.getX(),e.getY()), r,btnBojaKonture.getBackground(), btnBojaUnutrasnjosti.getBackground());
 							Krug k = (Krug) odabranOblik;
 							k.crtajSe(pnlCtrez.getGraphics());
+							pnlCtrez.add(k);
 							p = false;
 						} catch (Exception ex) {
 							
@@ -621,9 +607,10 @@ public class Crtanje extends JFrame {
 				}else if (btnOdabranDugmic == btnSelektuj){
 
 					if(selektovan != null){
+						selektovan.setSelektovan(false);
 						selektovan = null;
-						osveziCrtez();
-
+						
+						repaint();
 						osveziUIKomande(false);
 					}
 
@@ -633,11 +620,11 @@ public class Crtanje extends JFrame {
 						if(stakOblika.get(i).sadrzi(e.getX(), e.getY())){
 
 
-							osveziCrtez();
+							repaint();
 
 							selektovan = stakOblika.get(i);		
-							selektovan.selektovan(pnlCtrez.getGraphics());
-
+							selektovan.setSelektovan(true);
+							repaint();
 							osveziUIKomande(true);		
 
 							return;
@@ -646,7 +633,7 @@ public class Crtanje extends JFrame {
 				}else{
 					selektovan = null;
 
-					osveziCrtez();
+					repaint();
 				}
 
 				if(odabranOblik != null)
@@ -682,22 +669,13 @@ public class Crtanje extends JFrame {
 
 	}
 
-	public void osveziCrtez(){
-		Pravougaonik p = new Pravougaonik(new Tacka(0,0), pnlCtrez.getWidth(), pnlCtrez.getHeight(), Color.WHITE,Color.WHITE);
-		p.crtajSe(pnlCtrez.getGraphics());
-
-		for(Oblik o : stakOblika){
-			o.crtajSe(pnlCtrez.getGraphics());
-		}
-		if(selektovan!= null)
-			selektovan.selektovan(pnlCtrez.getGraphics());
-	}
-
+	
 	private void odaberiDugme(JButton dugme){
 
 		if(selektovan != null){
+			selektovan.setSelektovan(false);
 			selektovan = null;
-			osveziCrtez();
+			repaint();
 		}
 
 
@@ -828,5 +806,5 @@ public class Crtanje extends JFrame {
 
 
 
-
+	
 }
